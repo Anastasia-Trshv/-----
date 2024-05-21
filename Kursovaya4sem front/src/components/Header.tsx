@@ -5,7 +5,7 @@ export function Header(){
         <><Navbar bg="dark" data-bs-theme="dark">
             <Container>
                 <Navbar.Brand href="/">MAGAZIN</Navbar.Brand>
-                <Nav className="me-auto">
+                <Nav className="me-auto ">
                     <Nav.Link href="/">Домой</Nav.Link>
                     <Nav.Link href="/catalog">Каталог</Nav.Link>
                     <Nav.Link href="/log_in">Вход</Nav.Link>

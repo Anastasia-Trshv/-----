@@ -1,7 +1,7 @@
 export interface ISupply{
-    "Name": string,
-    "Description":string,
-    "Picture":string,
-    "Type": number,
-    "Price":number
+    "name": string,
+    "description":string,
+    "picture":string,
+    "type": number,
+    "price":number
 }
