@@ -1,13 +1,27 @@
 import { useEffect, useState } from "react";
 import { SupplyProduct } from "../components/SupplyCard";
 import{getAllSupplies} from "../services/supplies"
-import { supplies } from "../data/Supplies";
 import { ISupply } from "../model/model";
+import { Button, Col, Container, Row } from "react-bootstrap";
+import { Mode, SupCreater } from "../components/SupCreater";
 
 
 export function Catalog(){
+
+  const emptySup: ISupply ={
+    id:"",
+    name: "",
+    description:"",
+    picture:"",
+    type: 1,
+    price:1
+  }
 const[sups,setSups]=useState<ISupply[]>([]);
 const[loading,setLoading]=useState(true);
+const [showSupCreater, setShowSupCreater] = useState(false);
+const handleSupCreaterOpen=()=>{
+  setShowSupCreater(!showSupCreater);
+}
 
   useEffect(()=>{
     const getSup =async ()=>
@@ -22,9 +36,24 @@ const[loading,setLoading]=useState(true);
   },[])
 
     return(
-        <><h1>CATALOG</h1>
+      <>
+      
+      <Button onClick={handleSupCreaterOpen}>Создать товар</Button>
+      {showSupCreater && <SupCreater mode={Mode.Create} values={emptySup}></SupCreater>}
+
+      {loading ? 
+        <p className="text-center display-4">Loading...</p> 
+        :
         
-        {sups.map(sup => <SupplyProduct supply={sup}></SupplyProduct>)}
+        <Container><Row>
+          {sups.map(sup => <Col key={sup.id} > 
+          <div className=" d-flex align-items-stretch">
+            <SupplyProduct supply={sup}></SupplyProduct>
+          </div></Col>)}
+        </Row>
+        </Container>
+        
+        }
       </>
     )
 }

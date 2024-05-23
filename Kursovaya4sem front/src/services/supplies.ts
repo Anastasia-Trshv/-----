@@ -2,7 +2,7 @@ export interface SupplyRequest{
     Name:string,
     Description:string,
     Picture:string,
-    Typy:number,
+    Type:number,
     Price:number
 }
 
@@ -22,7 +22,7 @@ export const createSupply = async (supplyRequest: SupplyRequest) =>{
 
 }
 export const updateSupply = async (id:string, supplyRequest: SupplyRequest) =>{
-    await fetch('https://localhost:7099/Supplies/UpdateSupplies/${id}',{
+    await fetch(`https://localhost:7099/Supplies/UpdateSupplies/${id}`,{
         method:"PUT",
         headers:{
             "content-type":"Application/json"
@@ -32,7 +32,7 @@ export const updateSupply = async (id:string, supplyRequest: SupplyRequest) =>{
     });
 }
 export const deleteSupply = async (id:string) =>{
-    await fetch('https://localhost:7099/Supplies/DeleteSupplies/${id}',{
+    await fetch(`https://localhost:7099/Supplies/DeleteSupplies/${id}`,{
         method:"DELETE" 
         
     });

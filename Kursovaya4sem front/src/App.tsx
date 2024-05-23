@@ -19,7 +19,6 @@ function App() {
      <Header></Header>
 
     
-<SupCreater ></SupCreater>
 
       <Router>
       <Routes>
