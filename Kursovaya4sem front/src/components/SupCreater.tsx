@@ -39,7 +39,7 @@ export function SupCreater({
 
   const [show, setShow] = useState(true);
 
-  const handleOnOk = ()=>{
+  const handelOnOk = ()=>{
     mode === Mode.Edit
     ? handleEdit()
     : handleCreate();
@@ -119,7 +119,7 @@ export function SupCreater({
           <Button variant="secondary" onClick={handleClose}>
             Закрыть
           </Button>
-          <Button variant="primary" onClick={handleOnOk}>
+          <Button variant="primary" onClick={handelOnOk}>
             Сохранить 
           </Button>
         </Modal.Footer>

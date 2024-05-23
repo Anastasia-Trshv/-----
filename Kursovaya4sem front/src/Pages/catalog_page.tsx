@@ -38,7 +38,7 @@ const handleSupCreaterOpen=()=>{
     return(
       <>
       
-      <Button onClick={handleSupCreaterOpen}>Создать товар</Button>
+      <Button variant="secondary" onClick={handleSupCreaterOpen}>Создать товар</Button>
       {showSupCreater && <SupCreater mode={Mode.Create} values={emptySup}></SupCreater>}
 
       {loading ? 

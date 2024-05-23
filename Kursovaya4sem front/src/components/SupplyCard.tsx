@@ -2,6 +2,7 @@ import { Card, Button, ButtonGroup } from "react-bootstrap";
 import { ISupply } from "../model/model";
 import { SupCreater } from "./SupCreater";
 import { useState } from "react";
+import { deleteSupply } from "../services/supplies";
 
 interface SupplyProps{
     supply:ISupply
@@ -17,6 +18,10 @@ export function SupplyProduct(props:SupplyProps){
   const toggleSupCreater = () => {
     setShowSupCreater(!showSupCreater);
   };
+const handelDelete=async ()=>{
+  await deleteSupply(props.supply.id);
+}
+
     return(<>
     <Card style={{ width: '18rem' }}>
     <Card.Img variant="top" src={props.supply.picture} />
@@ -31,7 +36,7 @@ export function SupplyProduct(props:SupplyProps){
       <ButtonGroup aria-label="Basic example">
       <Button variant="secondary">В корзину</Button>
       <Button variant="secondary" onClick={toggleSupCreater}>Изменить</Button>
-      <Button variant="secondary">Удалить</Button>
+      <Button variant="secondary"onClick={handelDelete}>Удалить</Button>
     </ButtonGroup>
     </Card.Body>
   </Card>

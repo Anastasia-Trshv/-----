@@ -32,7 +32,7 @@ export const updateSupply = async (id:string, supplyRequest: SupplyRequest) =>{
     });
 }
 export const deleteSupply = async (id:string) =>{
-    await fetch(`https://localhost:7099/Supplies/DeleteSupplies/${id}`,{
+    await fetch(`https://localhost:7099/Supplies/DeleteSupply/${id}`,{
         method:"DELETE" 
         
     });
