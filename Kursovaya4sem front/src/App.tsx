@@ -7,7 +7,6 @@ import { Catalog } from './Pages/catalog_page';
 import { ShopCart } from './Pages/shopcart_page';
 import { Login } from './Pages/login_page';
 import { Registrating } from './Pages/registration_page';
-import { SupCreater } from './components/SupCreater';
 
 
 function App() {
