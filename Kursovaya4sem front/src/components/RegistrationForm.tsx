@@ -25,23 +25,28 @@ const handleOk=()=>{
     }
 
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+     let b =false;
    if(!regex.test(email)){
       setemailMassege(true);
+      b=true;
    }
    else{
     setemailMassege(false);
    }
     if (password.length<6){
        setPasMassege(true);
+       b=true;
     }
     else{
       setPasMassege(false);
      }
      if (name.trim() === "") {
       setnameMessage(true);
+      b=true;
   } else {
     setnameMessage(false);
   }
+  if(!b){
     const  answ: boolean=await checkUser(email);
     if (answ === false) {
       setMassege(false);
@@ -50,6 +55,8 @@ const handleOk=()=>{
   } else {
       setMassege(true);
   }
+  }
+    
   }
   
   CreateUs();

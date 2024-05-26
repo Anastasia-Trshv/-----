@@ -25,6 +25,7 @@ const handleOk=()=>{
     const user= await getUser(email,password);
     if(user.Email===""){
       setMessage(true)
+
     }
     else{
       setMessage(false);
@@ -33,7 +34,6 @@ const handleOk=()=>{
   }
  
   getUs();
-   // window.location.assign('http://localhost:5173/')
 }
 
 
