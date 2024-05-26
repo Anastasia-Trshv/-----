@@ -17,12 +17,23 @@ export const LoginForm=( {
 
 const [email, setEmail]=useState<string>("");
 const [password, setPassword]=useState<string>("");
+const[message, setMessage]=useState(false);
+
 
 const handleOk=()=>{
   const getUs = async()=>{
-    await getUser(email,password);
+    const user= await getUser(email,password);
+    if(user.Email===""){
+      setMessage(true)
+    }
+    else{
+      setMessage(false);
+      window.location.assign('http://localhost:5173/')
+    }
   }
+ 
   getUs();
+   // window.location.assign('http://localhost:5173/')
 }
 
 
@@ -32,7 +43,7 @@ const handleOk=()=>{
         <div className="d-flex justify-content-center">
         <Form>
     <Form.Group className="mb-3 " controlId="exampleForm.ControlInput1">
-      <Form.Label>Email</Form.Label>
+      <Form.Label>Email</Form.Label> {message && <p className="text-danger">Пользователь не найден</p>}
       <Form.Control
       value={email}
       onChange={(e)=>setEmail(e.target.value)}

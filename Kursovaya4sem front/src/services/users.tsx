@@ -17,8 +17,21 @@ export const createUser= async (userRequest : UserRequest)=>{
 }
 
 export const getUser = async (email:string, password:string)=>{
-    const response= await fetch(`https://localhost:7099/User/GetUser?${email}&${password}`)
-    return response.json();
+    const response= await fetch(`https://localhost:7099/User/GetUser?login=${email}&password=${password}`)
+    if(response.status===401){
+       const user: UserRequest={
+        Name:"",
+        Role:"",
+        Email:"",
+        Password:""
+       };
+        return user;
+       
+    }
+    else{
+
+        return response.json();
+    }
 }
 
 export const checkUser=async(email:string)=>{

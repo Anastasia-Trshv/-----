@@ -11,22 +11,42 @@ const [email, setEmail]=useState<string>("");
 const [password, setPassword]=useState<string>("");
 const [name, setName]=useState<string>("");
 const[message, setMassege]=useState(false);
-
+const[pasMessage, setPasMassege]=useState(false);
+const[emailMessage, setemailMassege]=useState(false);
+const[nameMessage,setnameMessage]=useState(false);
 
 const handleOk=()=>{
   const CreateUs = async()=>{
     const usReq: UserRequest={
-      Name:name,
-      Email:email,
+      Name:name.trim(),
+      Email:email.trim(),
       Role: "user",
-      Password:password
+      Password:password.trim()
     }
 
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+   if(!regex.test(email)){
+      setemailMassege(true);
+   }
+   else{
+    setemailMassege(false);
+   }
+    if (password.length<6){
+       setPasMassege(true);
+    }
+    else{
+      setPasMassege(false);
+     }
+     if (name.trim() === "") {
+      setnameMessage(true);
+  } else {
+    setnameMessage(false);
+  }
     const  answ: boolean=await checkUser(email);
     if (answ === false) {
       setMassege(false);
       await createUser(usReq);
-      window.location.assign('http://localhost:5173/catalog')
+      window.location.assign('http://localhost:5173/')
   } else {
       setMassege(true);
   }
@@ -42,6 +62,7 @@ const handleOk=()=>{
         <Form>
     <Form.Group className="mb-3 " controlId="exampleForm.ControlInput1">
       <Form.Label>Email</Form.Label> {message && <p className="text-danger">Этот адрес уже используется</p> }
+      {emailMessage && <p className="text-danger">Строка не является адресом электорнной почты</p> }
       <Form.Control
       value={email}
       onChange={(e)=>setEmail(e.target.value)}
@@ -53,6 +74,7 @@ const handleOk=()=>{
       controlId="exampleForm.ControlTextarea1"
     >
       <Form.Label>Пароль</Form.Label>
+       {pasMessage && <p className="text-danger">Минимальная длина пароля - 6 символов</p> }
       <Form.Control  
       value={password}
       
@@ -61,6 +83,7 @@ const handleOk=()=>{
     </Form.Group>
     <Form.Group className="mb-3 " controlId="exampleForm.ControlInput2">
       <Form.Label>Имя</Form.Label>
+      {nameMessage && <p className="text-danger">Поле обязательно для заполнения</p> }
       <Form.Control
       value={name}
       
