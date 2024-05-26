@@ -2,7 +2,8 @@ import { Container, Nav, Navbar } from "react-bootstrap";
 
 export function Header(){
     return(
-        <><Navbar bg="dark" data-bs-theme="dark">
+        <>
+        <Navbar fixed="top" bg="dark" data-bs-theme="dark">
             <Container>
                 <Navbar.Brand href="/">MAGAZIN</Navbar.Brand>
                 <Nav className="me-auto ">
@@ -11,6 +12,9 @@ export function Header(){
                     <Nav.Link href="/cart">Корзина</Nav.Link>
                 </Nav>
             </Container>
-        </Navbar><br /></>
+        </Navbar>
+        <div className="mt-5"></div>
+        <br />
+        </>
     )
 }

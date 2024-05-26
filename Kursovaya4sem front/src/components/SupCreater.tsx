@@ -10,11 +10,6 @@ import { SupplyRequest, createSupply, updateSupply } from "../services/supplies"
 interface Props{
   mode: Mode;
   values: ISupply;
-  
-  // handelCancel: ()=> void;
-  // handelCreate:(request:SupplyRequest) => void;
-  // handleUpdate:(id:string,  request: SupplyRequest)=> void;
-
 }
 export enum Mode{
   Create,
@@ -24,10 +19,7 @@ export enum Mode{
 
 export function SupCreater({
   mode,
-  values,
-  //handelCancel,
-  //handelCreate,
-  //handleUpdate,
+  values
 }:Props
 
 ){
