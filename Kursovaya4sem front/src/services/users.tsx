@@ -17,9 +17,11 @@ export interface IUserResponse{
 }
 
 
-export const createUser= async (userRequest : UserRequest)=>{
+export async function createUser  (userRequest : UserRequest): Promise<IUserResponse>
+{
     
  const dispatch=useAppDispatch();
+ 
    const response=  await fetch("https://localhost:7099/User/CreateUser",{
         method:"POST",
         headers:{
@@ -39,9 +41,12 @@ export const createUser= async (userRequest : UserRequest)=>{
     return resp;
 }
 
-export const getUser = async (email:string, password:string)=>{
+export async function getUser  (email:string, password:string): Promise<IUserResponse>
+
+{
     
- const dispatch=useAppDispatch();
+    const dispatch=useAppDispatch();
+
     const response= await fetch(`https://localhost:7099/User/GetUser?login=${email}&password=${password}`)
     if (response.status === 400) {
         const user: IUserResponse = {
@@ -63,7 +68,7 @@ export const getUser = async (email:string, password:string)=>{
     }
 }
 
-export const checkUser=async(email:string)=>{
+export async function checkUser(email:string){
     const response =await fetch(`https://localhost:7099/User/CheckUserExist?email=${email}`);
         return response.json();
     

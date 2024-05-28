@@ -1,7 +1,7 @@
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Header } from './components/Header'
-import { BrowserRouter as  Routes, Route } from 'react-router-dom';
+import {   Routes, Route } from 'react-router-dom';
 import { Catalog } from './Pages/catalog_page';
 import { ShopCart } from './Pages/shopcart_page';
 import { Login } from './Pages/login_page';

@@ -12,10 +12,12 @@ export const LoginForm=( )=>
 const [email, setEmail]=useState<string>("");
 const [password, setPassword]=useState<string>("");
 const[message, setMessage]=useState(false);
-
+    
 
 const handleOk=()=>{
   const getUs = async()=>{
+    
+//const navigate = useNavigate();
     const user: IUserResponse= await getUser(email,password);
     if(user.id===""){
       setMessage(true)
@@ -23,13 +25,12 @@ const handleOk=()=>{
     }
     else{
       setMessage(false);
-      window.location.assign('http://localhost:5173/')
+      //navigate("/");
     }
   }
  
   getUs();
 }
-
 
     return(
         <>

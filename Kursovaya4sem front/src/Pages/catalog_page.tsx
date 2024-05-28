@@ -19,7 +19,6 @@ export function Catalog(){
   }
 
 const admin=useAppSelector((state)=> state.auth.isAdmin);
-const login=useAppSelector((state)=> state.auth.isLogin);
 
 const[sups,setSups]=useState<ISupply[]>([]);
 const[loading,setLoading]=useState(true);
