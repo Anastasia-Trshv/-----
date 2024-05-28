@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { IUserResponse, getUser } from "../services/users";
+import { useAppDispatch } from "../redux/Hooks";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -9,23 +11,24 @@ import { IUserResponse, getUser } from "../services/users";
 export const LoginForm=( )=>
 { 
 
-const [email, setEmail]=useState<string>("");
-const [password, setPassword]=useState<string>("");
-const[message, setMessage]=useState(false);
-    
+  const [email, setEmail]=useState<string>("");
+  const [password, setPassword]=useState<string>("");
+  const[message, setMessage]=useState(false);
+  const dispatch=useAppDispatch();
+  const navigate = useNavigate();
 
 const handleOk=()=>{
   const getUs = async()=>{
     
-//const navigate = useNavigate();
-    const user: IUserResponse= await getUser(email,password);
+
+    const user: IUserResponse= await getUser(email,password, dispatch);
     if(user.id===""){
       setMessage(true)
 
     }
     else{
       setMessage(false);
-      //navigate("/");
+      navigate("/");
     }
   }
  

@@ -1,3 +1,4 @@
+import { Dispatch } from "@reduxjs/toolkit/react"
 import {  setRefreshToken, setAccessToken, setId, setRole } from "../redux/Auth"
 import { useAppDispatch } from "../redux/Hooks"
 
@@ -41,11 +42,11 @@ export async function createUser  (userRequest : UserRequest): Promise<IUserResp
     return resp;
 }
 
-export async function getUser  (email:string, password:string): Promise<IUserResponse>
+export async function getUser  (email:string, password:string, dispatch: Dispatch<any>): Promise<IUserResponse>
 
 {
     
-    const dispatch=useAppDispatch();
+    
 
     const response= await fetch(`https://localhost:7099/User/GetUser?login=${email}&password=${password}`)
     if (response.status === 400) {
