@@ -3,7 +3,10 @@ import {  PayloadAction, createSlice } from "@reduxjs/toolkit/react";
 export interface IAuth {
     isLogin: boolean,
     aToken: IToken,
-    rToken: IToken
+    rToken: IToken,
+    id: string,
+    role: string,
+    isAdmin: boolean
 }
   export interface IToken{
     isPresent:boolean
@@ -14,47 +17,64 @@ export interface IAuth {
 
     isLogin: false,
     aToken :{
-        isPresent: false,
-        token: ""
-    },
+      isPresent: false,
+      token: ""
+  },
 
     rToken :{
-    isPresent: false,
-    token: ""
-    }
+      isPresent: false,
+      token: ""
+  },
+
+  id: "", 
+  role: "",
+  isAdmin: false
+
 }
   
 
 export const authSlice = createSlice({
     name: 'auth',
-    initialState: initialState(),//создать файл
+    initialState,//создать файл
     reducers: {
       login: state => {
         state.isLogin=true;
       },
       logout: state => {
         state.isLogin=false;
-        localStorage.removeItem("RefreshToken");
+        state.isAdmin=false;
+        localStorage.removeItem("rToken");
+        localStorage.removeItem("id");
+        localStorage.removeItem("role");
       },
       setLogout: state => {
         state.isLogin=false;
       },
-      saveRefreshToken: (state, action:PayloadAction<string>) => {
-        state.isLogin=true;
-        state.refresh.isPresent=true;
-        state.access.token=action.payload;
-      },
-      setAccessToken: (state, action:PayloadAction<string>) =>{
-        state.access.isPresent=true;
-        state.access.token=action.payload;
+      // saveRefreshToken: (state, action:PayloadAction<string>) => {
+      //   state.isLogin=true;
+      //   state.rToken.isPresent=true;
+      //   state.aToken.token=action.payload;
+      // },
+      setAccessToken: (state, action:PayloadAction<string> ) =>{
+        state.aToken.isPresent=true;
+        state.aToken.token=action.payload;
       },
       setRefreshToken: (state, action:PayloadAction<string>) =>{
         state.isLogin=true;
-        state.refresh.isPresent=true;
-        state.refresh.token=action.payload;
+        state.rToken.isPresent=true;
+        state.rToken.token=action.payload;
       },
+      setRole: (state, action:PayloadAction<string>)=>{
+        state.role=action.payload;
+        if (state.role==="admin"){
+            state.isAdmin=true;
+        }
+      },
+      setId: (state,action:PayloadAction<string>)=>{
+        state.id=action.payload;
+      }
       
     }
   });
 
-  export const {login} = authSlice.actions;
+  export const {login, logout, setLogout,setRefreshToken,setAccessToken, setId,setRole} = authSlice.actions;

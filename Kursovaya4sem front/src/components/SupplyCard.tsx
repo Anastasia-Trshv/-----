@@ -3,6 +3,7 @@ import { ISupply } from "../model/model";
 import { SupCreater } from "./SupCreater";
 import { useState } from "react";
 import { deleteSupply } from "../services/supplies";
+import { useAppSelector } from "../redux/Hooks";
 
 interface SupplyProps{
     supply:ISupply
@@ -15,11 +16,24 @@ export enum Mode{
 export function SupplyProduct(props:SupplyProps){
   const [showSupCreater, setShowSupCreater] = useState(false);
 
+
+const login=useAppSelector((state)=> state.auth.isLogin);
+  
+const admin=useAppSelector((state)=> state.auth.isAdmin);
+
   const toggleSupCreater = () => {
     setShowSupCreater(!showSupCreater);
   };
 const handelDelete=async ()=>{
   await deleteSupply(props.supply.id);
+}
+const handleInCart = () =>{
+if(login){
+
+}
+else{
+  new Notification('Авторизуйтесь, чтобы пользоваться корзиной');
+}
 }
 
 return(<>
@@ -35,9 +49,9 @@ return(<>
     </Card.Text>
     <Container className="d-flex justify-content-center" >
     <ButtonGroup aria-label="Basic example">
-    <Button size="sm" variant="secondary">В корзину</Button>
-    <Button size="sm"variant="secondary" onClick={toggleSupCreater}>Изменить</Button>
-    <Button size="sm" variant="secondary"onClick={handelDelete}>Удалить</Button>
+     <Button size="sm" variant="secondary"onClick={handleInCart} >В корзину</Button>
+    {admin && <Button size="sm"variant="secondary" onClick={toggleSupCreater}>Изменить</Button>}
+    {admin && <Button size="sm" variant="secondary"onClick={handelDelete}>Удалить</Button>}
   </ButtonGroup>
   </Container>
   </Card.Body>

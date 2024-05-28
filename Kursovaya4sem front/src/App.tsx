@@ -14,12 +14,13 @@ function App() {
     <>
     
     <Header/>
-      <Routes>
+    <Routes>
         <Route  path="/"  element={<Catalog/>} />
         <Route  path="/cart"  element ={<ShopCart/>} />
         <Route  path="/log_in" element={<Login/>} />
         <Route  path="/registration"  element ={<Registrating/>} />
       </Routes>
+      
     </>
   )
 }
