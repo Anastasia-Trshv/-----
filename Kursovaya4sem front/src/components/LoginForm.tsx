@@ -1,18 +1,12 @@
 import { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import { UserRequest, getUser } from "../services/users";
+import { IUserResponse, getUser } from "../services/users";
 
 
-interface Props{
- // handleOk1: ()=> void;
-  
-}
 
  
 
-export const LoginForm=( {
- 
-}:Props)=>
+export const LoginForm=( )=>
 { 
 
 const [email, setEmail]=useState<string>("");
@@ -22,8 +16,8 @@ const[message, setMessage]=useState(false);
 
 const handleOk=()=>{
   const getUs = async()=>{
-    const user= await getUser(email,password);
-    if(user.Email===""){
+    const user: IUserResponse= await getUser(email,password);
+    if(user.id===""){
       setMessage(true)
 
     }

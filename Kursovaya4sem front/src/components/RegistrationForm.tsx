@@ -3,6 +3,7 @@ import { Button, Container, Form } from "react-bootstrap";
 import { UserRequest, checkUser, createUser } from "../services/users";
 
 import ReactDOM from "react-dom";
+import { useNavigate } from "react-router-dom";
 
 export function RegistrForm(){ 
 
@@ -14,7 +15,7 @@ const[message, setMassege]=useState(false);
 const[pasMessage, setPasMassege]=useState(false);
 const[emailMessage, setemailMassege]=useState(false);
 const[nameMessage,setnameMessage]=useState(false);
-
+const navigate = useNavigate();
 const handleOk=()=>{
   const CreateUs = async()=>{
     const usReq: UserRequest={
@@ -51,7 +52,7 @@ const handleOk=()=>{
     if (answ === false) {
       setMassege(false);
       await createUser(usReq);
-      window.location.assign('http://localhost:5173/')
+      navigate("/");
   } else {
       setMassege(true);
   }
