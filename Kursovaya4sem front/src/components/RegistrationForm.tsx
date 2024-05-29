@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { UserRequest, checkUser, createUser } from "../services/users";
 
-import ReactDOM from "react-dom";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../redux/Hooks";
 
 export function RegistrForm(){ 
 
@@ -16,6 +16,9 @@ const[pasMessage, setPasMassege]=useState(false);
 const[emailMessage, setemailMassege]=useState(false);
 const[nameMessage,setnameMessage]=useState(false);
 const navigate = useNavigate();
+const dispatch=useAppDispatch();
+
+
 const handleOk=()=>{
   const CreateUs = async()=>{
     const usReq: UserRequest={
@@ -51,7 +54,7 @@ const handleOk=()=>{
     const  answ: boolean=await checkUser(email);
     if (answ === false) {
       setMassege(false);
-      await createUser(usReq);
+      await createUser(usReq, dispatch);
       navigate("/");
   } else {
       setMassege(true);

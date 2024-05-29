@@ -5,6 +5,8 @@ import{getAllSupplies} from "../services/supplies"
 import { ISupply } from "../model/model";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { SupplyCartProduct } from "../components/SupplyCartCard";
+import { getCartSupplies } from "../services/cart";
+import { useAppSelector } from "../redux/Hooks";
 
 export function ShopCart (){
     const emptySup: ISupply ={
@@ -17,12 +19,13 @@ export function ShopCart (){
       }
     const[sups,setSups]=useState<ISupply[]>([]);
     const[loading,setLoading]=useState(true);
+    const id=useAppSelector((state)=> state.auth.id);
     
       useEffect(()=>{
         const getSup =async ()=>
           {
             setLoading(true);
-            const sups =await getAllSupplies();
+            const sups =await getCartSupplies(id);
             setLoading(false);
             setSups(sups);
           }

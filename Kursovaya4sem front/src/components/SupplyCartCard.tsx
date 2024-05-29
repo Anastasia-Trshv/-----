@@ -1,6 +1,7 @@
 import { Card, Button, ButtonGroup, Container } from "react-bootstrap";
 import { ISupply } from "../model/model";
-import { deleteSupply } from "../services/supplies";
+import { deleteFromCart } from "../services/cart";
+import { useAppSelector } from "../redux/Hooks";
 
 interface SupplyProps{
     supply:ISupply
@@ -8,9 +9,11 @@ interface SupplyProps{
 
 
 export function SupplyCartProduct(props:SupplyProps){
+  
+const id=useAppSelector((state)=> state.auth.id);
 
 const handelDelete=async ()=>{
-  await deleteSupply(props.supply.id);
+  await deleteFromCart( id,props.supply.id);
 }
 
 return(<>

@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/esm/Form";
 import InputGroup from "react-bootstrap/esm/InputGroup";
 import Modal from "react-bootstrap/esm/Modal";
 import { ISupply } from "../model/model";
 import { SupplyRequest, createSupply, updateSupply } from "../services/supplies";
+import { useState } from "react";
 
 
 interface Props{

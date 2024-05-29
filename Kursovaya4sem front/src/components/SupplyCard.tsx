@@ -4,6 +4,7 @@ import { SupCreater } from "./SupCreater";
 import { useState } from "react";
 import { deleteSupply } from "../services/supplies";
 import { useAppSelector } from "../redux/Hooks";
+import { AddToCart } from "../services/cart";
 
 interface SupplyProps{
     supply:ISupply
@@ -21,19 +22,18 @@ const login=useAppSelector((state)=> state.auth.isLogin);
   
 const admin=useAppSelector((state)=> state.auth.isAdmin);
 
+const id=useAppSelector((state)=> state.auth.id);
+
   const toggleSupCreater = () => {
     setShowSupCreater(!showSupCreater);
   };
 const handelDelete=async ()=>{
   await deleteSupply(props.supply.id);
 }
-const handleInCart = () =>{
-if(login){
+const handleInCart = async () =>{
+  await AddToCart(id, props.supply.id);
 
-}
-else{
-  new Notification('Авторизуйтесь, чтобы пользоваться корзиной');
-}
+
 }
 
 return(<>
@@ -49,7 +49,7 @@ return(<>
     </Card.Text>
     <Container className="d-flex justify-content-center" >
     <ButtonGroup aria-label="Basic example">
-     <Button size="sm" variant="secondary"onClick={handleInCart} >В корзину</Button>
+     {login && <Button size="sm" variant="secondary"onClick={handleInCart} >В корзину</Button>}
     {admin && <Button size="sm"variant="secondary" onClick={toggleSupCreater}>Изменить</Button>}
     {admin && <Button size="sm" variant="secondary"onClick={handelDelete}>Удалить</Button>}
   </ButtonGroup>

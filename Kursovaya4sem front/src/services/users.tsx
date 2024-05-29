@@ -1,6 +1,5 @@
 import { Dispatch } from "@reduxjs/toolkit/react"
 import {  setRefreshToken, setAccessToken, setId, setRole } from "../redux/Auth"
-import { useAppDispatch } from "../redux/Hooks"
 
 export interface UserRequest{
     Name:string,
@@ -18,10 +17,10 @@ export interface IUserResponse{
 }
 
 
-export async function createUser  (userRequest : UserRequest): Promise<IUserResponse>
+export async function createUser  (userRequest : UserRequest, dispatch: Dispatch<any>): Promise<IUserResponse>
 {
     
- const dispatch=useAppDispatch();
+ 
  
    const response=  await fetch("https://localhost:7099/User/CreateUser",{
         method:"POST",
