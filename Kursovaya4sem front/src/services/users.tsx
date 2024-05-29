@@ -19,9 +19,6 @@ export interface IUserResponse{
 
 export async function createUser  (userRequest : UserRequest, dispatch: Dispatch<any>): Promise<IUserResponse>
 {
-    
- 
- 
    const response=  await fetch("https://localhost:7099/User/CreateUser",{
         method:"POST",
         headers:{
@@ -44,9 +41,6 @@ export async function createUser  (userRequest : UserRequest, dispatch: Dispatch
 export async function getUser  (email:string, password:string, dispatch: Dispatch<any>): Promise<IUserResponse>
 
 {
-    
-    
-
     const response= await fetch(`https://localhost:7099/User/GetUser?login=${email}&password=${password}`)
     if (response.status === 400) {
         const user: IUserResponse = {

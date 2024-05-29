@@ -1,22 +1,13 @@
 
 import { useEffect, useState } from "react";
-import { SupplyProduct } from "../components/SupplyCard";
-import{getAllSupplies} from "../services/supplies"
 import { ISupply } from "../model/model";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import {  Col, Container, Row } from "react-bootstrap";
 import { SupplyCartProduct } from "../components/SupplyCartCard";
 import { getCartSupplies } from "../services/cart";
 import { useAppSelector } from "../redux/Hooks";
 
 export function ShopCart (){
-    const emptySup: ISupply ={
-        id:"",
-        name: "",
-        description:"",
-        picture:"",
-        type: 1,
-        price:1
-      }
+    
     const[sups,setSups]=useState<ISupply[]>([]);
     const[loading,setLoading]=useState(true);
     const id=useAppSelector((state)=> state.auth.id);

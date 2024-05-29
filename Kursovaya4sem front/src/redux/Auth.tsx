@@ -32,7 +32,6 @@ export interface IAuth {
 
 }
   
-
 export const authSlice = createSlice({
     name: 'auth',
     initialState,//создать файл
@@ -50,11 +49,6 @@ export const authSlice = createSlice({
       setLogout: state => {
         state.isLogin=false;
       },
-      // saveRefreshToken: (state, action:PayloadAction<string>) => {
-      //   state.isLogin=true;
-      //   state.rToken.isPresent=true;
-      //   state.aToken.token=action.payload;
-      // },
       setAccessToken: (state, action:PayloadAction<string> ) =>{
         state.aToken.isPresent=true;
         state.aToken.token=action.payload;

@@ -25,11 +25,11 @@ export function SupCreater({
 }:Props
 
 ){
-   const [name, setName]=useState<string>(""); 
+   const [name, setName]=useState<string>(values.name); 
    
-   const [description, setDescription]=useState<string>(""); 
+   const [description, setDescription]=useState<string>(values.description); 
    
-   const [price, setPrice]=useState<number>(1); 
+   const [price, setPrice]=useState<number>(values.price); 
 
   const [show, setShow] = useState(true);
   

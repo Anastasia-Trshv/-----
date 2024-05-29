@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { SupplyProduct } from "../components/SupplyCard";
 import{getAllSupplies} from "../services/supplies"
 import { ISupply } from "../model/model";
@@ -28,6 +28,9 @@ const handleSupCreaterOpen=()=>{
   setShowSupCreater(!showSupCreater);
 }
 
+
+
+
   useEffect(()=>{
     const getSup =async ()=>
       {
@@ -39,7 +42,6 @@ const handleSupCreaterOpen=()=>{
 
       getSup();
   },[])
-
   
 
   return(
@@ -58,7 +60,7 @@ const handleSupCreaterOpen=()=>{
               {sups.map(sup => 
                 <Col key={sup.id}> 
                   <div className="d-flex align-items-stretch">
-                    <SupplyProduct supply={sup}></SupplyProduct>
+                    <SupplyProduct  supply={sup}></SupplyProduct>
                   </div>
                 </Col>
               )}

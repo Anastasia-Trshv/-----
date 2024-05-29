@@ -7,7 +7,7 @@ import { useAppSelector } from "../redux/Hooks";
 import { AddToCart } from "../services/cart";
 
 interface SupplyProps{
-    supply:ISupply
+    supply:ISupply,
 }
 export enum Mode{
   Create,
@@ -15,8 +15,8 @@ export enum Mode{
 }
 
 export function SupplyProduct(props:SupplyProps){
-  const [showSupCreater, setShowSupCreater] = useState(false);
 
+const [showSupCreater, setShowSupCreater] = useState(false);
 
 const login=useAppSelector((state)=> state.auth.isLogin);
   
