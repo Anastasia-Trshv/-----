@@ -3,7 +3,7 @@ import { Button, Container, Form } from "react-bootstrap";
 import { UserRequest, checkUser, createUser } from "../services/users";
 
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../redux/Hooks";
+import { useAppDispatch, useAppSelector } from "../redux/Hooks";
 
 export function RegistrForm(){ 
 
@@ -15,6 +15,8 @@ const[message, setMassege]=useState(false);
 const[pasMessage, setPasMassege]=useState(false);
 const[emailMessage, setemailMassege]=useState(false);
 const[nameMessage,setnameMessage]=useState(false);
+
+const token = useAppSelector((state)=> state.auth.aToken.token);
 const navigate = useNavigate();
 const dispatch=useAppDispatch();
 
@@ -55,6 +57,7 @@ const handleOk=()=>{
     if (answ === false) {
       setMassege(false);
       await createUser(usReq, dispatch);
+      console.log(token);
       navigate("/");
   } else {
       setMassege(true);

@@ -21,11 +21,13 @@ export function ShopCart (){
     const[loading,setLoading]=useState(true);
     const id=useAppSelector((state)=> state.auth.id);
     
+const token = useAppSelector((state)=> state.auth.aToken.token);
+    
       useEffect(()=>{
         const getSup =async ()=>
           {
             setLoading(true);
-            const sups =await getCartSupplies(id);
+            const sups =await getCartSupplies(id,token);
             setLoading(false);
             setSups(sups);
           }
