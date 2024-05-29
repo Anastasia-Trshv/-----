@@ -23,6 +23,7 @@ const admin=useAppSelector((state)=> state.auth.isAdmin);
 const[sups,setSups]=useState<ISupply[]>([]);
 const[loading,setLoading]=useState(true);
 const [showSupCreater, setShowSupCreater] = useState(false);
+const token = useAppSelector((state)=> state.auth.aToken.token);
 const handleSupCreaterOpen=()=>{
   setShowSupCreater(!showSupCreater);
 }
@@ -31,7 +32,7 @@ const handleSupCreaterOpen=()=>{
     const getSup =async ()=>
       {
         setLoading(true);
-        const sups =await getAllSupplies();
+        const sups =await getAllSupplies(token);
         setLoading(false);
         setSups(sups);
       }

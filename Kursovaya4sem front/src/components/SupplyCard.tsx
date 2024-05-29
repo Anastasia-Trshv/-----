@@ -23,15 +23,16 @@ const login=useAppSelector((state)=> state.auth.isLogin);
 const admin=useAppSelector((state)=> state.auth.isAdmin);
 
 const id=useAppSelector((state)=> state.auth.id);
+const token = useAppSelector((state)=> state.auth.aToken.token);
 
   const toggleSupCreater = () => {
     setShowSupCreater(!showSupCreater);
   };
 const handelDelete=async ()=>{
-  await deleteSupply(props.supply.id);
+  await deleteSupply(props.supply.id, token);
 }
 const handleInCart = async () =>{
-  await AddToCart(id, props.supply.id);
+  await AddToCart(id, props.supply.id, token);
 
 
 }

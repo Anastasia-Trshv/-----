@@ -6,6 +6,7 @@ import Modal from "react-bootstrap/esm/Modal";
 import { ISupply } from "../model/model";
 import { SupplyRequest, createSupply, updateSupply } from "../services/supplies";
 import { useState } from "react";
+import { useAppSelector } from "../redux/Hooks";
 
 
 interface Props{
@@ -31,6 +32,8 @@ export function SupCreater({
    const [price, setPrice]=useState<number>(1); 
 
   const [show, setShow] = useState(true);
+  
+const token = useAppSelector((state)=> state.auth.aToken.token);
 
   const handelOnOk = ()=>{
     mode === Mode.Edit
@@ -49,7 +52,7 @@ export function SupCreater({
         Type: 1,
         Price: price
     };
-      await updateSupply(values.id,supReq);
+      await updateSupply(values.id,supReq, token);
     }
     upSup();
     handleClose();
@@ -65,7 +68,7 @@ export function SupCreater({
           Type: 1,
           Price: price
       };
-        await createSupply(supReq);
+        await createSupply(supReq, token);
       }
       CrSup();
       handleClose();}

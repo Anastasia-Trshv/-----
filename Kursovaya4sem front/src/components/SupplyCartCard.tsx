@@ -11,9 +11,9 @@ interface SupplyProps{
 export function SupplyCartProduct(props:SupplyProps){
   
 const id=useAppSelector((state)=> state.auth.id);
-
+const token= useAppSelector((state)=> state.auth.aToken.token);
 const handelDelete=async ()=>{
-  await deleteFromCart( id,props.supply.id);
+  await deleteFromCart( id,props.supply.id,token);
 }
 
 return(<>
