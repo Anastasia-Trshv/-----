@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { SupplyProduct } from "../components/SupplyCard";
-import{getAllSupplies} from "../services/supplies"
+import{deleteSupply, getAllSupplies} from "../services/supplies"
 import { ISupply } from "../model/model";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { Mode, SupCreater } from "../components/SupCreater";
@@ -20,10 +20,28 @@ export function Catalog(){
 
 const admin=useAppSelector((state)=> state.auth.isAdmin);
 
+
+
+
 const[sups,setSups]=useState<ISupply[]>([]);
 const[loading,setLoading]=useState(true);
 const [showSupCreater, setShowSupCreater] = useState(false);
 const token = useAppSelector((state)=> state.auth.aToken.token);
+
+const getSup =async ()=>
+  {
+    setLoading(true);
+    const sups =await getAllSupplies(token);
+    setLoading(false);
+    setSups(sups);
+  }
+
+const handelDelete=async (sup: ISupply)=>{
+  await deleteSupply(sup.id, token);
+  getSup();
+  
+}
+
 const handleSupCreaterOpen=()=>{
   setShowSupCreater(!showSupCreater);
 }
@@ -32,14 +50,6 @@ const handleSupCreaterOpen=()=>{
 
 
   useEffect(()=>{
-    const getSup =async ()=>
-      {
-        setLoading(true);
-        const sups =await getAllSupplies(token);
-        setLoading(false);
-        setSups(sups);
-      }
-
       getSup();
   },[])
   
@@ -60,7 +70,7 @@ const handleSupCreaterOpen=()=>{
               {sups.map(sup => 
                 <Col key={sup.id}> 
                   <div className="d-flex align-items-stretch">
-                    <SupplyProduct  supply={sup}></SupplyProduct>
+                    <SupplyProduct  handelDelete={() => handelDelete(sup)} supply={sup}></SupplyProduct>
                   </div>
                 </Col>
               )}
