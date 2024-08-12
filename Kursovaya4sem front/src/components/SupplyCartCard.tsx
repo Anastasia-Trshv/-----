@@ -1,22 +1,16 @@
 import { Card, Button, ButtonGroup, Container } from "react-bootstrap";
 import { ISupply } from "../model/model";
-import { deleteFromCart } from "../services/cart";
-import { useAppSelector } from "../redux/Hooks";
 
 interface SupplyProps{
-    supply:ISupply
+    supply:ISupply,
+    handelDelete: ()=>void 
 }
 
 
 export function SupplyCartProduct(props:SupplyProps){
   
-const id=useAppSelector((state)=> state.auth.id);
-const token = useAppSelector((state)=> state.auth.aToken.token);
 
-const handelDelete=async ()=>{
-  await deleteFromCart( id, props.supply.id, token);
-  
-}
+
 
 return(<>
   <Card style={{ width: '19rem' }}>
@@ -31,8 +25,8 @@ return(<>
     </Card.Text>
     <Container className="d-flex justify-content-center" >
     <ButtonGroup aria-label="Basic example">
-    <Button size="sm"variant="secondary" onClick={handelDelete}>Купить</Button>
-    <Button size="sm" variant="secondary"onClick={handelDelete}>Удалить</Button>
+    <Button size="sm"variant="secondary" onClick={props.handelDelete}>Купить</Button>
+    <Button size="sm" variant="secondary"onClick={props.handelDelete}>Удалить</Button>
   </ButtonGroup>
   </Container>
   </Card.Body>

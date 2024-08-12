@@ -29,13 +29,8 @@ const token = useAppSelector((state)=> state.auth.aToken.token);
   const toggleSupCreater = () => {
     setShowSupCreater(!showSupCreater);
   };
-  // const handelDelete=async ()=>{
-  //   await deleteSupply(props.supply.id, token);
-  // }
 const handleInCart = async () =>{
   await AddToCart(id, props.supply.id, token);
-
-
 }
 
 return(<>
@@ -51,7 +46,7 @@ return(<>
     </Card.Text>
     <Container className="d-flex justify-content-center" >
     <ButtonGroup aria-label="Basic example">
-     {login && <Button size="sm" variant="secondary"onClick={handleInCart} >В корзину</Button>}
+     {login && <Button size="sm" variant="secondary"onClick={handleInCart}>В корзину</Button>}
     {admin && <Button size="sm"variant="secondary" onClick={toggleSupCreater}>Изменить</Button>}
     {admin && <Button size="sm" variant="secondary"onClick={props.handelDelete}>Удалить</Button>}
   </ButtonGroup>
