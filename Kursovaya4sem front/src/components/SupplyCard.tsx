@@ -2,7 +2,6 @@ import { Card, Button, ButtonGroup, Container } from "react-bootstrap";
 import { ISupply } from "../model/model";
 import { SupCreater } from "./SupCreater";
 import { useState } from "react";
-import { deleteSupply } from "../services/supplies";
 import { useAppSelector } from "../redux/Hooks";
 import { AddToCart } from "../services/cart";
 

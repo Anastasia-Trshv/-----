@@ -6,3 +6,8 @@ export interface ISupply{
     "type": number,
     "price":number
 }
+ 
+export interface IType{
+    "id" : number,
+    "name":string
+}
