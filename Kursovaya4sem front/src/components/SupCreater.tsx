@@ -15,6 +15,7 @@ import { getAllTypes } from "../services/Type";
 interface Props{
   mode: Mode;
   values: ISupply;
+  getSups: ()=>void
 }
 export enum Mode{
   Create,
@@ -22,21 +23,20 @@ export enum Mode{
 }
 
 
-export function SupCreater({
-  mode,
-  values
-}:Props
+export function SupCreater(props:Props
 
 ){
-   const [name, setName]=useState<string>(values.name); 
+   const [name, setName]=useState<string>(props.values.name); 
    
-   const [description, setDescription]=useState<string>(values.description); 
+   const[picture, setPicture]= useState<string>(props.values.picture)
+
+   const [description, setDescription]=useState<string>(props.values.description); 
    
-   const [price, setPrice]=useState<number>(values.price); 
+   const [price, setPrice]=useState<number>(props.values.price); 
 
   const [show, setShow] = useState(true);
 
-  const [type, setType] = useState<number>(values.type)
+  const [type, setType] = useState<number>(props.values.type)
   const[types, setTypes]=useState<IType[]>([]);
   
 const token = useAppSelector((state)=> state.auth.aToken.token);
@@ -48,7 +48,7 @@ const getTypes = async ()=> {
 
 
   const handelOnOk = ()=>{
-    mode === Mode.Edit
+    props.mode === Mode.Edit
     ? handleEdit()
     : handleCreate();
 
@@ -60,14 +60,15 @@ const getTypes = async ()=> {
       const supReq: SupplyRequest = {
         Name: name,
         Description: description,
-        Picture: "https://ultrasolarblock.ru/upload/uf/af7/tyou4y8cgt4nvcd22c4x8hwy6kkgf587.jpg",
+        Picture: picture,
         Type: type,
         Price: price
     };
-      await updateSupply(values.id,supReq, token);
+      await updateSupply(props.values.id,supReq, token);
     }
     upSup();
     handleClose();
+    props.getSups();
   }
 
     const handleCreate = () => 
@@ -76,14 +77,20 @@ const getTypes = async ()=> {
         const supReq: SupplyRequest = {
           Name: name,
           Description: description,
-          Picture: "https://ultrasolarblock.ru/upload/uf/af7/tyou4y8cgt4nvcd22c4x8hwy6kkgf587.jpg",
+          Picture: picture,
           Type: type,
           Price: price
       };
         await createSupply(supReq, token);
       }
       CrSup();
-      handleClose();}
+      handleClose();
+      props.getSups();}
+
+
+
+
+      
 
       useEffect (()=>{
         getTypes();
@@ -94,7 +101,7 @@ const getTypes = async ()=> {
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>{mode===Mode.Create ? "Создание товара": "Редактирование товара"}</Modal.Title>
+          <Modal.Title>{props.mode===Mode.Create ? "Создание товара": "Редактирование товара"}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -119,7 +126,7 @@ const getTypes = async ()=> {
 
             <Form.Group>
               <Form.Label>Тип товара</Form.Label>
-              <Form.Select aria-label="Default select example" 
+              <Form.Select aria-label="Default select example" value={type}
       onChange={(e) => setType(parseInt(e.target.value, 10))}>
               {types.map((option) => (
       <option key={option.id} value={option.id}>
@@ -129,6 +136,16 @@ const getTypes = async ()=> {
     </Form.Select>
             </Form.Group>
             
+            
+      
+        
+          <Form.Group controlId="formFile">
+            <Form.Label>Фотография</Form.Label>
+            <Form.Control value={picture} onChange={(e)=>setPicture(e.target.value)} type="file"  />
+          </Form.Group>
+        
+  
+
             <Form.Label>Цена</Form.Label>
             <InputGroup className="mb-3">
         <Form.Control 

@@ -7,7 +7,8 @@ import { AddToCart } from "../services/cart";
 
 interface SupplyProps{
     supply:ISupply,
-    handelDelete: ()=>void 
+    handelDelete: ()=>void ,
+    getSups: ()=>void
 }
 export enum Mode{
   Create,
@@ -54,6 +55,6 @@ return(<>
 </Card>
 
 
-  {showSupCreater && <SupCreater mode={Mode.Edit} values={props.supply}></SupCreater>}
+  {showSupCreater && <SupCreater mode={Mode.Edit} values={props.supply} getSups={props.getSups}></SupCreater>}
   </>)
 }

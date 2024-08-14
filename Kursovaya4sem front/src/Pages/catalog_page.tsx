@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { SupplyProduct } from "../components/SupplyCard";
 import{deleteSupply, getAllSupplies} from "../services/supplies"
 import { ISupply } from "../model/model";
@@ -59,7 +59,7 @@ const handleSupCreaterOpen=()=>{
       <>
         {admin && <Container><Button variant="secondary" onClick={handleSupCreaterOpen}>Создать товар</Button></Container>}
         
-        {showSupCreater && <SupCreater mode={Mode.Create} values={emptySup}></SupCreater>}
+        {showSupCreater && <SupCreater mode={Mode.Create}  values={emptySup} getSups={getSup}></SupCreater>}
         
         {loading ? 
           <p className="text-center display-4">Loading...</p> 
@@ -70,7 +70,7 @@ const handleSupCreaterOpen=()=>{
               {sups.map(sup => 
                 <Col key={sup.id}> 
                   <div className="d-flex align-items-stretch">
-                    <SupplyProduct  handelDelete={() => handelDelete(sup)} supply={sup}></SupplyProduct>
+                    <SupplyProduct  getSups={getSup} handelDelete={() => handelDelete(sup)} supply={sup}></SupplyProduct>
                   </div>
                 </Col>
               )}
